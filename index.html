@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Verde Nova: un espacio digital para descubrir ideas, tecnología y soluciones creativas.">
+  <meta name="theme-color" content="#07110c">
+  <title>Verde Nova — Ideas que toman forma</title>
+  <style>
+    :root{
+      --bg:#07110c;--panel:#0d1b13;--panel2:#102319;--green:#70f0a0;
+      --green2:#28c76f;--text:#edf8f0;--muted:#a3b7aa;--line:rgba(151,255,185,.14);
+      --shadow:0 24px 70px rgba(0,0,0,.34);--radius:22px;--max:1160px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(ellipse at 15% 5%,rgba(40,199,111,.14),transparent 38%),radial-gradient(ellipse at 85% 45%,rgba(112,240,160,.08),transparent 35%),linear-gradient(145deg,#07110c,#08150e 55%,#050b08)}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
+    .top-glow{position:fixed;width:420px;height:420px;border-radius:50%;background:rgba(40,199,111,.08);filter:blur(90px);pointer-events:none;z-index:-1;top:15%;right:-220px}
+    header{position:sticky;top:0;z-index:20;background:rgba(7,17,12,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.08em}
+    .brand-mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--green),#1b9b53);display:grid;place-items:center;color:#06200f;font-weight:900;box-shadow:0 0 28px rgba(112,240,160,.25)}
+    .nav-links{display:flex;gap:27px;align-items:center;color:var(--muted);font-size:.92rem}
+    .nav-links a:hover,.nav-links a.active{color:var(--green)}
+    .menu-btn{display:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:12px;padding:8px 12px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;border-radius:999px;padding:12px 19px;font-weight:700;cursor:pointer;transition:.25s ease}
+    .btn-primary{background:var(--green);color:#06200f;box-shadow:0 8px 30px rgba(112,240,160,.16)}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(112,240,160,.27)}
+    .btn-ghost{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.025)}
+    .btn-ghost:hover{border-color:rgba(112,240,160,.5);color:var(--green);transform:translateY(-2px)}
+    .hero{min-height:680px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:60px;padding:88px 0 80px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--green);font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+    h1{font-size:clamp(3rem,7vw,6.1rem);line-height:.99;letter-spacing:-.065em;margin:22px 0}
+    h1 span{color:var(--green)}
+    .hero-copy{max-width:570px;color:var(--muted);font-size:1.08rem}
+    .hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
+    .hero-note{display:flex;align-items:center;gap:10px;margin-top:34px;color:#82988a;font-size:.85rem}
+    .hero-visual{position:relative;min-height:460px;display:grid;place-items:center}
+    .orb{position:absolute;width:min(390px,80vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(112,240,160,.25),rgba(40,199,111,.06) 42%,transparent 70%);border:1px solid rgba(112,240,160,.14);box-shadow:inset 0 0 70px rgba(112,240,160,.06),0 0 90px rgba(40,199,111,.08);animation:float 7s ease-in-out infinite}
+    .orb::before,.orb::after{content:"";position:absolute;inset:12%;border:1px solid rgba(112,240,160,.17);border-radius:50%;transform:rotateX(68deg) rotateZ(25deg)}
+    .orb::after{inset:1%;transform:rotateX(68deg) rotateZ(-35deg)}
+    .visual-card{position:relative;width:min(350px,90%);padding:25px;border:1px solid rgba(151,255,185,.2);border-radius:25px;background:linear-gradient(145deg,rgba(17,42,27,.88),rgba(7,17,12,.9));box-shadow:var(--shadow);backdrop-filter:blur(16px);transform:rotate(-4deg);animation:float 6s ease-in-out infinite reverse}
+    .visual-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.78rem}
+    .visual-icon{width:58px;height:58px;border-radius:18px;background:rgba(112,240,160,.12);display:grid;place-items:center;color:var(--green);font-size:1.7rem;margin:28px 0 18px}
+    .visual-card h3{font-size:1.55rem;margin:0 0 8px}
+    .visual-card p{color:var(--muted);font-size:.9rem;margin:0}
+    .bars{display:flex;gap:6px;margin-top:25px}.bars i{height:5px;border-radius:8px;background:var(--green);opacity:.85}.bars i:nth-child(1){width:44%}.bars i:nth-child(2){width:24%;opacity:.5}.bars i:nth-child(3){width:14%;opacity:.25}
+    section{padding:92px 0}
+    .section-head{max-width:650px;margin-bottom:38px}
+    .section-head h2{font-size:clamp(2rem,4vw,3.4rem);line-height:1.08;letter-spacing:-.045em;margin:12px 0}
+    .section-head p{color:var(--muted);margin:0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+    .card{padding:25px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(16,35,25,.86),rgba(10,22,15,.72));transition:.28s ease}
+    .card:hover{transform:translateY(-7px);border-color:rgba(112,240,160,.42);box-shadow:0 20px 45px rgba(0,0,0,.22)}
+    .card-icon{width:47px;height:47px;border-radius:15px;background:rgba(112,240,160,.1);color:var(--green);display:grid;place-items:center;font-size:1.3rem;margin-bottom:22px}
+    .card h3{margin:0 0 8px;font-size:1.15rem}.card p{margin:0;color:var(--muted);font-size:.94rem}
+    .feature{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center}
+    .feature-panel{padding:30px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,#10271a,#0a160f);position:relative;overflow:hidden}
+    .feature-panel::after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;right:-90px;top:-100px;background:rgba(112,240,160,.12);filter:blur(35px)}
+    .stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+    .stat{padding:18px;border-radius:17px;background:rgba(0,0,0,.2);border:1px solid var(--line)}
+    .stat strong{display:block;color:var(--green);font-size:1.5rem}.stat span{color:var(--muted);font-size:.82rem}
+    .check-list{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:13px;color:var(--muted)}
+    .check-list li::before{content:"✓";color:var(--green);font-weight:900;margin-right:11px}
+    .project-card{padding:0;overflow:hidden}
+    .project-art{height:190px;display:grid;place-items:center;background:radial-gradient(circle at 50% 50%,rgba(112,240,160,.18),transparent 60%),linear-gradient(135deg,#102b1c,#08130c);border-bottom:1px solid var(--line);font-size:3.5rem;color:var(--green)}
+    .project-body{padding:22px}
+    .tag{display:inline-block;color:var(--green);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:800;margin-bottom:8px}
+    .project-body p{color:var(--muted);font-size:.9rem}
+    .project-body a{color:var(--green);font-weight:700;font-size:.9rem}
+    .faq{max-width:800px}
+    .faq-item{border-bottom:1px solid var(--line)}
+    .faq-q{width:100%;display:flex;justify-content:space-between;gap:20px;text-align:left;background:none;border:0;color:var(--text);padding:21px 0;cursor:pointer;font-weight:700}
+    .faq-q span:last-child{color:var(--green);font-size:1.3rem;transition:transform .2s}
+    .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+    .faq-a>div{overflow:hidden;color:var(--muted)}
+    .faq-item.open .faq-a{grid-template-rows:1fr}
+    .faq-item.open .faq-q span:last-child{transform:rotate(45deg)}
+    .faq-a p{margin:0;padding:0 0 20px}
+    .contact-box{padding:clamp(25px,5vw,55px);border-radius:30px;border:1px solid rgba(112,240,160,.22);background:radial-gradient(circle at 90% 10%,rgba(112,240,160,.12),transparent 35%),linear-gradient(135deg,#10271a,#0a160f);display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .contact-box h2{font-size:clamp(2rem,4vw,3.2rem);line-height:1.08;letter-spacing:-.04em;margin:10px 0}
+    .contact-box p{color:var(--muted);max-width:570px;margin:0}
+    footer{padding:30px 0 42px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+    .footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap}.footer-links a:hover{color:var(--green)}
+    .toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:12px 17px;border:1px solid var(--line);border-radius:12px;background:#10271a;color:var(--text);box-shadow:var(--shadow);transition:.25s;z-index:50}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @keyframes float{0%,100%{translate:0 0}50%{translate:0 -13px}}
+    @media(max-width:850px){.hero{grid-template-columns:1fr;gap:15px;padding-top:65px}.hero-visual{min-height:380px}.grid{grid-template-columns:repeat(2,1fr)}.feature{grid-template-columns:1fr}.contact-box{align-items:flex-start;flex-direction:column}}
+    @media(max-width:620px){.wrap{width:min(var(--max),calc(100% - 28px))}.nav{height:68px}.menu-btn{display:block}.nav-links{display:none;position:absolute;top:68px;left:14px;right:14px;padding:18px;border:1px solid var(--line);border-radius:18px;background:#0b1910;flex-direction:column;align-items:stretch;gap:14px}.nav-links.open{display:flex}.nav-links a{padding:5px}.nav-cta{display:none}h1{font-size:clamp(2.8rem,15vw,4.5rem)}section{padding:70px 0}.grid{grid-template-columns:1fr}.hero{min-height:auto;padding-bottom:35px}.hero-visual{min-height:330px}.orb{width:290px}.visual-card{width:290px}.stat-row{grid-template-columns:1fr 1fr}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="top-glow" aria-hidden="true"></div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#inicio" aria-label="Verde Nova, ir al inicio"><span class="brand-mark">V</span><span>VERDE<span style="color:var(--green)">NOVA</span></span></a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#enfoque">Enfoque</a><a href="#proyectos">Ideas</a><a href="#faq">Preguntas</a>
+      </nav>
+      <a class="btn btn-primary nav-cta" href="#contacto">Hablemos <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="inicio">
+      <div class="reveal">
+        <div class="eyebrow"><span class="dot"></span> Un espacio para nuevas ideas</div>
+        <h1>Ideas que<br>toman <span>forma.</span></h1>
+        <p class="hero-copy">Verde Nova explora el punto donde la creatividad y la tecnología se encuentran. Un concepto digital para transformar ideas en experiencias claras, útiles y memorables.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#servicios">Explorar el espacio <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#enfoque">Conocer el enfoque</a>
+        </div>
+        <div class="hero-note"><span class="dot"></span> Diseño consciente · Tecnología · Creatividad</div>
+      </div>
+      <div class="hero-visual reveal" aria-label="Ilustración abstracta de una interfaz digital">
+        <div class="orb"></div>
+        <div class="visual-card">
+          <div class="visual-top"><span>VERDE NOVA / LAB</span><span>● EN LÍNEA</span></div>
+          <div class="visual-icon" aria-hidden="true">✳</div>
+          <h3>Piensa diferente.</h3>
+          <p>Una idea, muchas posibilidades. Explora, conecta y crea algo nuevo.</p>
+          <div class="bars" aria-hidden="true"><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="servicios">
+      <div class="section-head reveal">
+        <div class="eyebrow">01 / Lo que nos mueve</div>
+        <h2>Un universo de posibilidades.</h2>
+        <p>Un espacio conceptual que reúne distintas formas de convertir una idea en algo útil y atractivo.</p>
+      </div>
+      <div class="grid">
+        <article class="card reveal"><div class="card-icon">⌘</div><h3>Experiencias digitales</h3><p>Interfaces claras, accesibles y agradables que hacen sencilla la navegación.</p></article>
+        <article class="card reveal"><div class="card-icon">✦</div><h3>Creatividad aplicada</h3><p>Conceptos visuales con personalidad, intención y atención a los pequeños detalles.</p></article>
+        <article class="card reveal"><div class="card-icon">⌁</div><h3>Tecnología útil</h3><p>Herramientas digitales e inteligencia artificial como apoyo para explorar soluciones.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap" id="enfoque">
+      <div class="feature">
+        <div class="feature-panel reveal">
+          <div class="eyebrow">02 / Nuestra filosofía</div>
+          <h2 style="font-size:2.2rem;line-height:1.12;letter-spacing:-.04em">Menos ruido.<br><span style="color:var(--green)">Más intención.</span></h2>
+          <p style="color:var(--muted)">Creemos que una buena experiencia no necesita complicarse. Debe sentirse natural, funcionar bien y comunicar con claridad.</p>
+          <div class="stat-row">
+            <div class="stat"><strong>01</strong><span>Claridad primero</span></div>
+            <div class="stat"><strong>∞</strong><span>Curiosidad constante</span></div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="eyebrow">Una buena experiencia</div>
+          <div class="section-head" style="margin:12px 0 0"><h2>Diseñada para las personas.</h2><p>La tecnología debe facilitar las cosas. Por eso cada elemento tiene un propósito: orientar, informar o ayudar a dar el siguiente paso.</p></div>
+          <ul class="check-list">
+            <li>Navegación sencilla y consistente.</li>
+            <li>Diseño adaptable a diferentes pantallas.</li>
+            <li>Contenido organizado y fácil de entender.</li>
+            <li>Privacidad y seguridad como parte del proceso.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="proyectos">
+      <div class="section-head reveal">
+        <div class="eyebrow">03 / En exploración</div>
+        <h2>Ideas en movimiento.</h2>
+        <p>Ejemplos conceptuales de áreas que pueden convertirse en experiencias digitales.</p>
+      </div>
+      <div class="grid">
+        <article class="card project-card reveal"><div class="project-art" aria-hidden="true">◈</div><div class="project-body"><span class="tag">Concepto / 01</span><h3>Panel de productividad</h3><p>Una vista organizada para priorizar tareas, objetivos y avances.</p><a href="#contacto">Explorar concepto ↗</a></div></article>
+        <article class="card project-card reveal"><div class="project-art" aria-hidden="true">⌘</div><div class="project-body"><span class="tag">Concepto / 02</span><h3>Laboratorio creativo</h3><p>Un espacio para reunir referencias, experimentar y desarrollar ideas.</p><a href="#contacto">Explorar concepto ↗</a></div></article>
+        <article class="card project-card reveal"><div class="project-art" aria-hidden="true">✧</div><div class="project-body"><span class="tag">Concepto / 03</span><h3>Experiencia sostenible</h3><p>Una propuesta visual que comunica hábitos y decisiones conscientes.</p><a href="#contacto">Explorar concepto ↗</a></div></article>
+      </div>
+    </section>
+
+    <section class="wrap" id="faq">
+      <div class="section-head reveal"><div class="eyebrow">04 / Preguntas frecuentes</div><h2>Lo esencial, sin vueltas.</h2></div>
+      <div class="faq reveal">
+        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>¿Qué es Verde Nova?</span><span>＋</span></button><div class="faq-a"><div><p>Es una página conceptual de muestra sobre creatividad, tecnología y experiencias digitales. Puedes personalizarla para convertirla en un proyecto propio.</p></div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>¿Los proyectos son reales?</span><span>＋</span></button><div class="faq-a"><div><p>Los tres elementos de la sección de ideas son ejemplos conceptuales, no productos o servicios que estén actualmente disponibles.</p></div></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>¿La página guarda mis datos?</span><span>＋</span></button><div class="faq-a"><div><p>No. Esta versión no incluye analítica, cookies de seguimiento, formularios ni almacenamiento de información personal.</p></div></div></div>
+      </div>
+    </section>
+
+    <section class="wrap" id="contacto">
+      <div class="contact-box reveal">
+        <div><div class="eyebrow">05 / El siguiente paso</div><h2>Las buenas ideas<br>empiezan con una pregunta.</h2><p>¿Tienes una idea que quieras explorar? Este espacio está preparado para que puedas adaptarlo y añadir tus propios canales de contacto.</p></div>
+        <a class="btn btn-primary" href="mailto:hola@verdenova.example?subject=Hola%20Verde%20Nova">Escribir un correo ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <a class="brand" href="#inicio"><span class="brand-mark">V</span><span>VERDE<span style="color:var(--green)">NOVA</span></span></a>
+      <span>© <span id="year"></span> Verde Nova. Proyecto conceptual.</span>
+      <div class="footer-links"><a href="#inicio">Volver arriba ↑</a><a href="#faq">Privacidad</a></div>
+    </div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    'use strict';
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const opened = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(opened));
+      menuBtn.setAttribute('aria-label', opened ? 'Cerrar menú' : 'Abrir menú');
+      menuBtn.textContent = opened ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'Abrir menú');
+      menuBtn.textContent = '☰';
+    }));
+
+    document.querySelectorAll('.faq-q').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const isOpen = item.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // En esta demo no se recopilan ni almacenan datos personales.
+    // No se usan eval(), cookies, almacenamiento local ni scripts de terceros.
+  </script>
+</body>
+</html>
